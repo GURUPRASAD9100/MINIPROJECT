@@ -1,0 +1,46 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Button</title>
+</head>
+<body>
+    <button id="sendEmailButton">Send Email</button>
+
+    <script>
+        document.getElementById('sendEmailButton').addEventListener('click', function() {
+            sendEmail();
+        });
+
+        function sendEmail() {
+            fetch('sendemail.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    console.log('Email sent successfully');
+                } else {
+                    console.error('Failed to send email:', data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
